@@ -167,32 +167,24 @@ p{margin:0}
 .dato strong{display:block; font-family:var(--serif); font-size:30px; color:var(--aji); line-height:1}
 .dato span{font-size:13px; color:rgba(255,255,255,.72)}
 
-/* Plato ilustrado en CSS — sin imágenes externas que puedan fallar */
-.plato{position:relative; aspect-ratio:1; max-width:460px; margin-inline:auto; width:100%}
-.plato__disco{
-  position:absolute; inset:0; border-radius:50%;
-  background:radial-gradient(circle at 34% 28%, #FFFDF8, #EFE3D2 58%, #D8C6AE 100%);
-  box-shadow:0 40px 70px -30px rgba(0,0,0,.65), inset 0 -8px 26px rgba(0,0,0,.12);
+/* Plato de la portada: la foto se recorta en círculo, que es lo que "quita" el
+   fondo de mesa sin tener que retocar la imagen. */
+.plato{position:relative; aspect-ratio:1; max-width:460px; margin:0 auto; width:100%}
+.plato__foto{
+  width:100%; height:100%; object-fit:cover; object-position:50% 52%;
+  border-radius:50%; border:10px solid rgba(255,255,255,.14);
+  box-shadow:0 44px 80px -34px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.12);
 }
-.plato__aro{position:absolute; inset:8.5%; border-radius:50%; border:2px solid rgba(122,31,31,.16)}
-.plato__comida{position:absolute; inset:17%; border-radius:50%; overflow:hidden}
-.plato__arroz{position:absolute; inset:0; background:radial-gradient(circle at 40% 40%, #6F8F3E, #4E6B2A 70%, #3D5620); clip-path:circle(50% at 50% 50%)}
-.plato__grano{position:absolute; inset:0; opacity:.5;
-  background-image:repeating-radial-gradient(circle at 30% 35%, rgba(255,255,255,.55) 0 1.4px, transparent 1.4px 9px),
-                   repeating-radial-gradient(circle at 70% 65%, rgba(255,255,255,.4) 0 1.2px, transparent 1.2px 11px)}
-.plato__pieza{position:absolute; border-radius:44% 56% 52% 48%/48% 44% 56% 52%; box-shadow:inset 0 -6px 12px rgba(0,0,0,.28), 0 6px 14px rgba(0,0,0,.28)}
-.p1{width:44%; height:36%; left:8%; top:12%; background:linear-gradient(150deg,#B45A22,#8A3D12)}
-.p2{width:30%; height:26%; right:9%; top:30%; background:linear-gradient(150deg,#D98E2B,#A65F14)}
-.p3{width:26%; height:22%; left:26%; bottom:9%; background:linear-gradient(150deg,#E9D9A8,#C9B47B)}
-.p4{width:18%; height:15%; right:24%; bottom:14%; background:linear-gradient(150deg,#8E1F2E,#5E1119)}
-.plato__vaso{
-  position:absolute; right:-4%; bottom:2%; width:26%; aspect-ratio:.62; border-radius:8px 8px 16px 16px;
-  background:linear-gradient(175deg, rgba(255,255,255,.55), rgba(255,255,255,.18));
-  border:1.5px solid rgba(255,255,255,.5); overflow:hidden; backdrop-filter:blur(3px);
-  box-shadow:0 20px 34px -16px rgba(0,0,0,.6);
+/* Aro punteado que gira detrás del plato */
+.plato__aro{
+  position:absolute; inset:-5%; border-radius:50%;
+  border:2px dashed rgba(232,163,61,.45); pointer-events:none;
 }
-.plato__vaso::after{content:""; position:absolute; left:0; right:0; bottom:0; height:74%; background:linear-gradient(180deg,#6D2A5E,#3B1436)}
-.plato__vaso::before{content:""; position:absolute; z-index:2; left:12%; top:14%; width:14%; height:64%; background:rgba(255,255,255,.4); border-radius:99px; filter:blur(1px)}
+.plato__bebida{
+  position:absolute; right:-2%; bottom:4%; width:30%; aspect-ratio:1;
+  object-fit:cover; border-radius:50%; border:6px solid rgba(255,255,255,.18);
+  box-shadow:0 22px 40px -18px rgba(0,0,0,.8);
+}
 .plato__etiqueta{
   position:absolute; left:-6%; top:8%; background:#fff; color:var(--tinta); border-radius:14px;
   padding:12px 17px; box-shadow:var(--sombra-alta); font-size:13px; line-height:1.35; max-width:210px;
@@ -235,18 +227,16 @@ p{margin:0}
 .firma__dato span{font-size:13.5px; color:var(--tinta-2)}
 
 .mosaico{display:grid; grid-template-columns:1fr 1fr; grid-template-rows:170px 170px 170px; gap:14px}
-.mosaico > div{border-radius:var(--r-m); position:relative; overflow:hidden; box-shadow:var(--sombra); display:flex; align-items:flex-end; padding:16px; color:#fff; font-weight:600; font-size:14px; text-shadow:0 2px 8px rgba(0,0,0,.5)}
-.mosaico > div::after{content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,.45), transparent 55%)}
-.mosaico > div span{position:relative; z-index:1}
-.m1{grid-row:span 2; background:linear-gradient(150deg,#8B2626,#3E1010)}
-.m2{background:linear-gradient(150deg,#D98E2B,#A65F14)}
-.m3{background:linear-gradient(150deg,#4A2545,#2A122A)}
-.m4{background:linear-gradient(150deg,#2F6B4F,#1B4030)}
-.m5{grid-column:span 1; background:linear-gradient(150deg,#6F8F3E,#3D5620)}
-.mosaico > div::before{
-  content:""; position:absolute; inset:0; opacity:.18;
-  background-image:repeating-linear-gradient(45deg, rgba(255,255,255,.7) 0 2px, transparent 2px 12px);
+.mosaico figure{
+  margin:0; border-radius:var(--r-m); position:relative; overflow:hidden; box-shadow:var(--sombra);
+  display:flex; align-items:flex-end; padding:16px;
+  color:#fff; font-weight:600; font-size:14px; text-shadow:0 2px 8px rgba(0,0,0,.65);
+  background:var(--tinta); /* de fondo mientras carga la foto */
 }
+.mosaico img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .5s}
+.mosaico figure::after{content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,.72), rgba(0,0,0,.1) 55%)}
+.mosaico figcaption{position:relative; z-index:1; line-height:1.3}
+.m1{grid-row:span 2}
 
 /* ============ La Carta ============ */
 .filtros{display:flex; gap:9px; flex-wrap:wrap; justify-content:center; margin-bottom:44px}
@@ -258,15 +248,30 @@ p{margin:0}
 .filtro:hover{border-color:var(--vino); color:var(--vino)}
 .filtro[aria-pressed="true"]{background:var(--vino); border-color:var(--vino); color:#fff; box-shadow:0 8px 18px -10px rgba(122,31,31,.9)}
 
-.carta{display:grid; grid-template-columns:repeat(2,1fr); gap:14px 44px}
+.carta{display:grid; grid-template-columns:repeat(3,1fr); gap:26px}
+/* Cada plato es una ficha: foto grande arriba, nombre y precio en la misma
+   línea, y la descripción cerrando abajo. */
 .plato-item{
-  display:grid; grid-template-columns:1fr auto; gap:6px 16px; align-items:baseline;
-  padding:18px 0; border-bottom:1px dashed var(--linea);
+  display:grid; grid-template-columns:1fr auto; align-content:start;
+  background:#fff; border:1px solid var(--linea); border-radius:var(--r-m);
+  overflow:hidden; box-shadow:var(--sombra);
+  transition:transform .35s cubic-bezier(.22,.7,.3,1), box-shadow .35s, border-color .35s;
 }
 .plato-item.oculto{display:none}
-.plato-item__nom{font-family:var(--serif); font-size:19.5px; font-weight:700; display:flex; align-items:center; gap:9px; flex-wrap:wrap}
-.plato-item__desc{grid-column:1/-1; color:var(--tinta-2); font-size:.92rem; margin-top:-2px; max-width:52ch}
-.precio{font-family:var(--serif); font-size:20px; font-weight:700; color:var(--vino); white-space:nowrap}
+.plato-item__foto{
+  grid-column:1/-1; width:100%; height:auto; aspect-ratio:4/3;
+  object-fit:cover; background:var(--crema-2); transition:transform .55s cubic-bezier(.22,.7,.3,1);
+}
+.plato-item__nom{
+  font-family:var(--serif); font-size:19px; font-weight:700; line-height:1.25;
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  padding:17px 8px 0 20px;
+}
+.plato-item__desc{grid-column:1/-1; color:var(--tinta-2); font-size:.9rem; padding:7px 20px 20px; line-height:1.55}
+.precio{
+  font-family:var(--serif); font-size:20px; font-weight:700; color:var(--vino);
+  white-space:nowrap; padding:17px 20px 0 0;
+}
 .etiqueta{font-family:var(--sans); font-size:10px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; padding:3px 9px; border-radius:999px}
 .et-estrella{background:rgba(232,163,61,.24); color:#8A5A0E}
 .et-picante{background:rgba(155,44,44,.14); color:var(--vino)}
@@ -376,6 +381,16 @@ p{margin:0}
 .redes svg{width:18px; height:18px}
 .pie__base{margin-top:52px; border-top:1px solid rgba(255,255,255,.11); padding-block:22px; display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap; font-size:13px; color:#8D8073}
 
+/* Créditos de fotografía: presentes pero sin robar protagonismo */
+.creditos{margin-top:44px; border-top:1px solid rgba(255,255,255,.11); padding-top:22px; font-size:12.5px; color:#8D8073}
+.creditos summary{cursor:pointer; font-weight:600; color:#A3958A; list-style:none; display:flex; align-items:center; gap:8px}
+.creditos summary::before{content:"▸"; transition:transform .2s}
+.creditos[open] summary::before{transform:rotate(90deg)}
+.creditos summary::-webkit-details-marker{display:none}
+.creditos p{margin:14px 0 10px; max-width:70ch}
+.creditos ul{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:4px 24px}
+.creditos a{color:#A3958A; text-decoration:underline; text-underline-offset:2px}
+
 /* Botón flotante de WhatsApp */
 .wapp{
   position:fixed; right:20px; bottom:20px; z-index:90;
@@ -389,79 +404,66 @@ p{margin:0}
 .revelar{opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1)}
 .revelar.visto{opacity:1; transform:none}
 
-/* ============ Animaciones ============ */
-@keyframes entrar{from{opacity:0; transform:translateY(26px)} to{opacity:1; transform:none}}
-@keyframes entrarIzq{from{opacity:0; transform:translateX(-24px)} to{opacity:1; transform:none}}
-@keyframes flotar{0%,100%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-14px) rotate(1.2deg)}}
-@keyframes flotarLento{0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)}}
+/* ============ Animaciones ============
+   Criterio: recorridos cortos, curvas de salida suave y nada que rebote ni
+   gire. El movimiento debe acompañar la lectura, no competir con la carta. */
+@keyframes entrar{from{opacity:0; transform:translateY(13px)} to{opacity:1; transform:none}}
+@keyframes flotar{0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)}}
+@keyframes flotarLento{0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)}}
 @keyframes girar{to{transform:rotate(360deg)}}
-@keyframes latir{0%,100%{transform:scale(1)} 45%{transform:scale(1.09)}}
-@keyframes brillo{0%{transform:translateX(-120%) skewX(-18deg)} 100%{transform:translateX(320%) skewX(-18deg)}}
-@keyframes burbuja{0%{transform:translateY(0); opacity:0} 20%{opacity:.85} 100%{transform:translateY(-140%); opacity:0}}
-@keyframes onda{to{transform:scale(2.6); opacity:0}}
-@keyframes deslizarMenu{from{opacity:0; transform:translateY(-10px)} to{opacity:1; transform:none}}
+@keyframes brillo{0%{transform:translateX(-120%) skewX(-16deg)} 100%{transform:translateX(320%) skewX(-16deg)}}
+@keyframes onda{to{transform:scale(2.2); opacity:0}}
+@keyframes deslizarMenu{from{opacity:0; transform:translateY(-6px)} to{opacity:1; transform:none}}
 
 /* La portada entra escalonada al cargar */
-.portada__insignia{animation:entrar .7s .05s both}
-.portada h1{animation:entrar .8s .15s both}
-.portada__texto{animation:entrar .8s .3s both}
-.portada__botones{animation:entrar .8s .42s both}
-.portada__datos{animation:entrar .8s .54s both}
-.plato{animation:entrar .9s .3s both, flotar 9s 1.2s ease-in-out infinite}
-.plato__etiqueta{animation:entrar .6s .9s both, flotarLento 6s 1.5s ease-in-out infinite}
-.plato__aro{animation:girar 60s linear infinite}
-
-/* Burbujas dentro del vaso de chicha */
-.plato__vaso i{
-  position:absolute; z-index:3; bottom:8%; width:7px; height:7px; border-radius:50%;
-  background:rgba(255,255,255,.55); animation:burbuja 4.5s ease-in infinite;
-}
-.plato__vaso i:nth-child(1){left:28%; animation-delay:.2s}
-.plato__vaso i:nth-child(2){left:52%; width:5px; height:5px; animation-delay:1.6s}
-.plato__vaso i:nth-child(3){left:70%; width:6px; height:6px; animation-delay:3s}
+.portada__insignia{animation:entrar .9s .06s both ease-out}
+.portada h1{animation:entrar 1s .16s both ease-out}
+.portada__texto{animation:entrar 1s .28s both ease-out}
+.portada__botones{animation:entrar 1s .38s both ease-out}
+.portada__datos{animation:entrar 1s .48s both ease-out}
+.plato{animation:entrar 1.1s .3s both ease-out, flotar 15s 1.8s ease-in-out infinite}
+.plato__etiqueta{animation:entrar .9s .85s both ease-out}
+.plato__aro{animation:girar 150s linear infinite}
+.plato__bebida{animation:entrar .9s .7s both ease-out, flotarLento 13s 2.4s ease-in-out infinite}
 
 /* Escalonado de los bloques que aparecen al bajar */
-.revelar{transition-delay:calc(var(--i,0) * 90ms)}
+.revelar{transition-delay:calc(var(--i,0) * 55ms)}
 
 /* Barra de progreso de lectura */
 .progreso{
   position:absolute; left:0; bottom:0; height:3px; width:0%;
   background:linear-gradient(90deg,var(--aji),var(--vino-cla));
-  border-radius:0 3px 3px 0; transition:width .12s linear; z-index:2;
+  border-radius:0 3px 3px 0; transition:width .2s ease-out; z-index:2;
 }
 
 /* Brillo que recorre los botones dorados y primarios al pasar el cursor */
 .btn--oro,.btn--primario{position:relative; overflow:hidden}
 .btn--oro::after,.btn--primario::after{
   content:""; position:absolute; top:0; bottom:0; width:38%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.42),transparent);
-  transform:translateX(-120%) skewX(-18deg); pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
+  transform:translateX(-120%) skewX(-16deg); pointer-events:none;
 }
-.btn--oro:hover::after,.btn--primario:hover::after{animation:brillo .85s ease-out}
+.btn--oro:hover::after,.btn--primario:hover::after{animation:brillo 1.1s ease-out}
 
-/* Onda al pulsar cualquier botón */
+/* Onda al pulsar: marca el toque y se apaga enseguida */
 .onda{
   position:absolute; border-radius:50%; pointer-events:none;
-  background:rgba(255,255,255,.45); transform:scale(0); animation:onda .6s ease-out forwards;
+  background:rgba(255,255,255,.3); transform:scale(0); animation:onda .75s ease-out forwards;
 }
-.btn--linea .onda,.filtro .onda,.pestana .onda{background:rgba(122,31,31,.22)}
+.btn--linea .onda,.filtro .onda,.pestana .onda{background:rgba(122,31,31,.14)}
 
-/* Detalles vivos en tarjetas y platos de la carta */
-.tarjeta__icono{transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
-.tarjeta:hover .tarjeta__icono{transform:rotate(-7deg) scale(1.08)}
-.plato-item{transition:background .2s, padding-left .2s}
-.plato-item:hover{background:rgba(232,163,61,.09); padding-left:12px; border-radius:8px}
-.plato-item .precio{transition:transform .2s}
-.plato-item:hover .precio{transform:scale(1.06)}
-.info-fila{transition:transform .2s, box-shadow .2s}
-.info-fila:hover{transform:translateX(5px); box-shadow:var(--sombra)}
-.mosaico > div{transition:transform .3s, filter .3s}
-.mosaico > div:hover{transform:scale(1.03); filter:saturate(1.2)}
-.wapp{animation:flotarLento 4s ease-in-out infinite}
-.wapp:hover{animation:latir .7s ease-in-out infinite}
+/* Detalles al pasar el cursor: solo lo justo para saber que algo responde */
+.tarjeta__icono{transition:transform .4s ease-out}
+.tarjeta:hover .tarjeta__icono{transform:rotate(-4deg) scale(1.04)}
+.plato-item:hover{transform:translateY(-3px); box-shadow:var(--sombra-alta); border-color:#D6C3A9}
+.plato-item:hover .plato-item__foto{transform:scale(1.035)}
+.info-fila{transition:transform .3s ease-out, box-shadow .3s}
+.info-fila:hover{transform:translateX(3px); box-shadow:var(--sombra)}
+.mosaico figure:hover img{transform:scale(1.04)}
+.wapp{animation:flotarLento 7s ease-in-out infinite}
 
-/* Los platos filtrados reaparecen con animación */
-.plato-item.entrando{animation:entrar .45s both}
+/* Los platos filtrados reaparecen con una entrada corta */
+.plato-item.entrando{animation:entrar .5s both ease-out}
 
 /* ============ Barra de acciones inferior (solo celular) ============ */
 .barra-movil{display:none}
@@ -499,8 +501,9 @@ html[data-dispositivo="movil"] .wapp{display:none}          /* ya está en la ba
 /* En pantalla táctil el hover no existe: se anulan los efectos que dependen de él */
 html[data-dispositivo="movil"] .tarjeta:hover,
 html[data-dispositivo="movil"] .info-fila:hover,
-html[data-dispositivo="movil"] .mosaico > div:hover,
-html[data-dispositivo="movil"] .plato-item:hover{transform:none; padding-left:0; background:transparent; filter:none}
+html[data-dispositivo="movil"] .mosaico figure:hover,
+html[data-dispositivo="movil"] .plato-item:hover{transform:none; box-shadow:var(--sombra); filter:none}
+html[data-dispositivo="movil"] .plato-item:active{transform:scale(.99)}
 html[data-dispositivo="movil"] .tarjeta:active{transform:scale(.985)}
 html[data-dispositivo="movil"] .btn:active{transform:scale(.96)}
 
@@ -533,6 +536,9 @@ html[data-dispositivo="movil"] .pestanas{
 html[data-dispositivo="movil"] .pestanas::-webkit-scrollbar{display:none}
 html[data-dispositivo="movil"] .pestana{flex:0 0 78%; scroll-snap-align:center}
 
+/* La foto se achata un poco: en vertical, un 4:3 completo empuja el texto fuera de pantalla */
+html[data-dispositivo="movil"] .plato-item__foto{aspect-ratio:16/10}
+
 /* El mapa necesita altura útil, pero sin comerse la pantalla */
 html[data-dispositivo="movil"] .local__mapa{min-height:300px}
 
@@ -552,6 +558,7 @@ html.sin-scroll,html.sin-scroll body{overflow:hidden}
   .portada__caja{grid-template-columns:1fr; gap:44px}
   .plato{max-width:380px}
   .historia,.reservas{grid-template-columns:1fr; gap:40px}
+  .carta{grid-template-columns:repeat(2,1fr)}
   .local{grid-template-columns:1fr}
   .local__mapa{min-height:340px; order:-1}
   .menu-dia{grid-template-columns:1fr}
@@ -571,8 +578,8 @@ html.sin-scroll,html.sin-scroll body{overflow:hidden}
   .hamburguesa{display:grid}
   .nav__tel{display:none}
   .nav__acciones .btn{display:none}
-  .r-3,.r-2,.carta{grid-template-columns:1fr}
-  .carta{gap:0}
+  .r-3,.r-2{grid-template-columns:1fr}
+  .carta{grid-template-columns:repeat(2,1fr); gap:18px}
   .campos{grid-template-columns:1fr}
   .mosaico{grid-template-rows:130px 130px 130px}
   .avisos .contenedor{gap:12px; font-size:12.5px}
@@ -580,6 +587,7 @@ html.sin-scroll,html.sin-scroll body{overflow:hidden}
 }
 @media (max-width:560px){
   body{font-size:16px}
+  .carta{grid-template-columns:1fr}
   .pie__caja{grid-template-columns:1fr}
   .portada__datos{gap:22px}
   .plato__etiqueta{left:0; max-width:170px; font-size:12px}
@@ -666,23 +674,17 @@ html.sin-scroll,html.sin-scroll body{overflow:hidden}
       </div>
     </div>
 
-    <div class="plato" aria-hidden="true">
-      <div class="plato__disco"></div>
-      <div class="plato__aro"></div>
-      <div class="plato__comida">
-        <div class="plato__arroz"></div>
-        <div class="plato__grano"></div>
-        <div class="plato__pieza p1"></div>
-        <div class="plato__pieza p2"></div>
-        <div class="plato__pieza p3"></div>
-        <div class="plato__pieza p4"></div>
-      </div>
-      <div class="plato__vaso"><i></i><i></i><i></i></div>
-      <div class="plato__etiqueta">
+    <figure class="plato">
+      <span class="plato__aro" aria-hidden="true"></span>
+      <img class="plato__foto" src="img/hero.jpg" width="960" height="720" fetchpriority="high"
+           alt="Plato de arroz con pato a la chiclayana: arroz verde de culantro con presa de pato dorada y ají.">
+      <img class="plato__bebida" src="img/chichamorada.jpg" width="250" height="188" loading="lazy"
+           alt="Vaso de chicha morada de la casa.">
+      <figcaption class="plato__etiqueta">
         <b>Arroz con pato</b>
         <i>El plato de la casa · S/ 28</i>
-      </div>
-    </div>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -727,12 +729,27 @@ html.sin-scroll,html.sin-scroll body{overflow:hidden}
         </div>
       </div>
 
-      <div class="mosaico revelar" aria-hidden="true">
-        <div class="m1"><span>Cocina a la vista</span></div>
-        <div class="m2"><span>Ají amarillo molido a diario</span></div>
-        <div class="m3"><span>Chicha morada de la casa</span></div>
-        <div class="m4"><span>Salón para eventos</span></div>
-        <div class="m5"><span>Leña y olla de barro</span></div>
+      <div class="mosaico revelar">
+        <figure class="m1">
+          <img src="img/mos-pato.jpg" alt="Plato de arroz con pato acompañado de sarza criolla." loading="lazy" decoding="async" width="500" height="600">
+          <figcaption>Arroz con pato, el plato de la casa</figcaption>
+        </figure>
+        <figure class="m2">
+          <img src="img/mos-aji.jpg" alt="Pasta de ají amarillo recién molida." loading="lazy" decoding="async" width="500" height="375">
+          <figcaption>Ají amarillo molido a diario</figcaption>
+        </figure>
+        <figure class="m3">
+          <img src="img/mos-chicha.jpg" alt="Olla con chicha morada preparada con maíz morado." loading="lazy" decoding="async" width="500" height="375">
+          <figcaption>Chicha morada de la casa</figcaption>
+        </figure>
+        <figure class="m4">
+          <img src="img/mos-pica.jpg" alt="Picarones bañados en miel de chancaca." loading="lazy" decoding="async" width="500" height="375">
+          <figcaption>Picarones los fines de semana</figcaption>
+        </figure>
+        <figure class="m5">
+          <img src="img/mos-cocina.jpg" alt="Cocina tradicional a leña con ollas al fuego." loading="lazy" decoding="async" width="500" height="375">
+          <figcaption>Cocina a leña, sin apuro</figcaption>
+        </figure>
       </div>
     </div>
 
@@ -778,154 +795,190 @@ html.sin-scroll,html.sin-scroll body{overflow:hidden}
 
       <!-- Entradas -->
       <article class="plato-item" data-cat="entradas">
+        <img class="plato-item__foto" src="img/huancaina.jpg" alt="Papa a la huancaína con huevo y aceituna." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Papa a la huancaína</h3><span class="precio">S/ 12</span>
         <p class="plato-item__desc">Papa amarilla, crema de ají amarillo con queso fresco, huevo y aceituna de Tacna.</p>
       </article>
       <article class="plato-item" data-cat="entradas">
+        <img class="plato-item__foto" src="img/causa.jpg" alt="Causa limeña rellena de pollo." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Causa rellena de pollo</h3><span class="precio">S/ 14</span>
         <p class="plato-item__desc">Dos pisos de papa prensada con limón y ají, rellena de pollo deshilachado con mayonesa casera.</p>
       </article>
       <article class="plato-item" data-cat="entradas">
+        <img class="plato-item__foto" src="img/anticucho.jpg" alt="Anticuchos de corazón a la parrilla." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Anticuchos de corazón <span class="etiqueta et-estrella">Recomendado</span></h3><span class="precio">S/ 16</span>
         <p class="plato-item__desc">Tres palos macerados en ají panca y chicha de jora, con papa dorada y choclo.</p>
       </article>
       <article class="plato-item" data-cat="entradas">
+        <img class="plato-item__foto" src="img/ocopa.jpg" alt="Ocopa arequipeña sobre papa sancochada." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Ocopa arequipeña <span class="etiqueta et-vegg">Vegetariano</span></h3><span class="precio">S/ 13</span>
         <p class="plato-item__desc">Salsa de huacatay, maní y galleta sobre papa sancochada.</p>
       </article>
       <article class="plato-item" data-cat="entradas">
+        <img class="plato-item__foto" src="img/calamar.jpg" alt="Chicharrón de calamar apanado." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Chicharrón de calamar</h3><span class="precio">S/ 22</span>
         <p class="plato-item__desc">Calamar apanado en chuño, yuca frita y salsa criolla con rocoto.</p>
       </article>
       <article class="plato-item" data-cat="entradas">
+        <img class="plato-item__foto" src="img/tamal.jpg" alt="Tamal peruano abierto en su hoja de plátano." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Tamal norteño</h3><span class="precio">S/ 9</span>
         <p class="plato-item__desc">Maíz molido en batán con pollo, huevo y aceituna, envuelto en hoja de plátano.</p>
       </article>
 
       <!-- Fondos criollos -->
       <article class="plato-item" data-cat="criollos">
+        <img class="plato-item__foto" src="img/pato.jpg" alt="Arroz con pato a la chiclayana." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Arroz con pato a la chiclayana <span class="etiqueta et-estrella">La casa</span></h3><span class="precio">S/ 28</span>
         <p class="plato-item__desc">Pato macerado toda la noche en chicha de jora, arroz verde de culantro y zapallo loche.</p>
       </article>
       <article class="plato-item" data-cat="criollos">
+        <img class="plato-item__foto" src="img/cabrito.jpg" alt="Cabrito a la norteña con frejol y yuca." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Cabrito a la norteña</h3><span class="precio">S/ 30</span>
         <p class="plato-item__desc">Cabrito tierno guisado tres horas, frejol blanco, yuca y arroz blanco.</p>
       </article>
       <article class="plato-item" data-cat="criollos">
+        <img class="plato-item__foto" src="img/seco.jpg" alt="Seco de res con frejoles y arroz." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Seco de res con frejoles</h3><span class="precio">S/ 24</span>
         <p class="plato-item__desc">Punta de pecho en culantro molido a mano, frejol canario y sarza criolla.</p>
       </article>
       <article class="plato-item" data-cat="criollos">
+        <img class="plato-item__foto" src="img/ajigallina.jpg" alt="Ají de gallina con papa y huevo." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Ají de gallina</h3><span class="precio">S/ 20</span>
         <p class="plato-item__desc">Gallina deshilachada en crema de ají amarillo con nuez, papa, huevo y arroz.</p>
       </article>
       <article class="plato-item" data-cat="criollos">
+        <img class="plato-item__foto" src="img/lomo.jpg" alt="Lomo saltado con papas fritas y arroz." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Lomo saltado</h3><span class="precio">S/ 26</span>
         <p class="plato-item__desc">Lomo fino al wok con cebolla, tomate y sillao, papas fritas cortadas al momento.</p>
       </article>
       <article class="plato-item" data-cat="criollos">
+        <img class="plato-item__foto" src="img/carapulcra.jpg" alt="Carapulcra acompañada de sopa seca." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Carapulcra con sopa seca</h3><span class="precio">S/ 23</span>
         <p class="plato-item__desc">Papa seca chinchana con cerdo y maní, acompañada de tallarín rojo.</p>
       </article>
       <article class="plato-item" data-cat="criollos">
+        <img class="plato-item__foto" src="img/caucau.jpg" alt="Cau cau de mondongo con papa amarilla." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Cau cau de mondongo</h3><span class="precio">S/ 19</span>
         <p class="plato-item__desc">Mondongo en palillo y hierbabuena con papa en cubos.</p>
       </article>
       <article class="plato-item" data-cat="criollos">
+        <img class="plato-item__foto" src="img/adobo.jpg" alt="Adobo de chancho en su jugo." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Adobo de chancho <span class="etiqueta et-picante">Picante</span></h3><span class="precio">S/ 22</span>
         <p class="plato-item__desc">Chancho macerado en chicha, ají panca y comino. Se sirve con pan chapla.</p>
       </article>
       <article class="plato-item" data-cat="criollos">
+        <img class="plato-item__foto" src="img/tallarin.jpg" alt="Tallarín saltado criollo con carne y verduras." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Tallarín saltado criollo</h3><span class="precio">S/ 21</span>
         <p class="plato-item__desc">Fideo saltado con pollo o carne, verduras al wok y un toque de sillao.</p>
       </article>
       <article class="plato-item" data-cat="criollos">
+        <img class="plato-item__foto" src="img/estofado.jpg" alt="Estofado de pollo con arvejas y zanahoria." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Estofado de pollo</h3><span class="precio">S/ 18</span>
         <p class="plato-item__desc">Presa de pollo guisada con arvejas, zanahoria y pasas. El favorito de los niños.</p>
       </article>
 
       <!-- Del mar -->
       <article class="plato-item" data-cat="marinos">
+        <img class="plato-item__foto" src="img/ceviche.jpg" alt="Ceviche de pescado con camote, choclo y cebolla." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Ceviche de pescado del día <span class="etiqueta et-estrella">Recomendado</span></h3><span class="precio">S/ 25</span>
         <p class="plato-item__desc">Bonito o cachema según llegada, limón de Chulucanas, cebolla, camote y choclo.</p>
       </article>
       <article class="plato-item" data-cat="marinos">
+        <img class="plato-item__foto" src="img/cevmixto.jpg" alt="Ceviche mixto con pescado y mariscos." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Ceviche mixto</h3><span class="precio">S/ 30</span>
         <p class="plato-item__desc">Pescado, pulpo, calamar y langostinos en leche de tigre de la casa.</p>
       </article>
       <article class="plato-item" data-cat="marinos">
+        <img class="plato-item__foto" src="img/jalea.jpg" alt="Jalea mixta con yuca y salsa criolla." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Jalea mixta para dos</h3><span class="precio">S/ 34</span>
         <p class="plato-item__desc">Pescado y mariscos apanados, yuca, chifles y abundante salsa criolla.</p>
       </article>
       <article class="plato-item" data-cat="marinos">
+        <img class="plato-item__foto" src="img/arrozmar.jpg" alt="Arroz con mariscos." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Arroz con mariscos</h3><span class="precio">S/ 27</span>
         <p class="plato-item__desc">Arroz cremoso al ají panca con conchas, langostinos y calamar.</p>
       </article>
       <article class="plato-item" data-cat="marinos">
+        <img class="plato-item__foto" src="img/sudado.jpg" alt="Sudado de pescado en salsa de tomate y ají." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Sudado de cachema</h3><span class="precio">S/ 24</span>
         <p class="plato-item__desc">Pescado entero al vapor con tomate, chicha y ají limo. Con yuca sancochada.</p>
       </article>
       <article class="plato-item" data-cat="marinos">
+        <img class="plato-item__foto" src="img/chicharron.jpg" alt="Chicharrón de pescado con yuca frita." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Chicharrón de pescado</h3><span class="precio">S/ 23</span>
         <p class="plato-item__desc">Trozos de filete apanados, yuca frita y salsa tártara casera.</p>
       </article>
       <article class="plato-item" data-cat="marinos">
+        <img class="plato-item__foto" src="img/lechetigre.jpg" alt="Vaso de leche de tigre con cancha." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Leche de tigre <span class="etiqueta et-picante">Picante</span></h3><span class="precio">S/ 15</span>
         <p class="plato-item__desc">Vaso concentrado con pescado, chicharrón de calamar y cancha serrana.</p>
       </article>
 
       <!-- Postres -->
       <article class="plato-item" data-cat="postres">
+        <img class="plato-item__foto" src="img/suspiro.jpg" alt="Suspiro a la limeña con merengue y canela." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Suspiro a la limeña</h3><span class="precio">S/ 10</span>
         <p class="plato-item__desc">Manjar blanco con merengue al oporto y canela molida.</p>
       </article>
       <article class="plato-item" data-cat="postres">
+        <img class="plato-item__foto" src="img/arrozleche.jpg" alt="Vasos de mazamorra morada y arroz con leche." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Arroz con leche y mazamorra morada</h3><span class="precio">S/ 9</span>
         <p class="plato-item__desc">El clásico combinado, servido tibio. También por separado a S/ 6.</p>
       </article>
       <article class="plato-item" data-cat="postres">
+        <img class="plato-item__foto" src="img/picarones.jpg" alt="Picarones recién fritos con miel de chancaca." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Picarones con miel de chancaca</h3><span class="precio">S/ 11</span>
         <p class="plato-item__desc">Seis picarones de zapallo y camote, fritos al momento.</p>
       </article>
       <article class="plato-item" data-cat="postres">
+        <img class="plato-item__foto" src="img/kingkong.jpg" alt="Barra de king kong de Lambayeque." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">King kong de manjarblanco</h3><span class="precio">S/ 8</span>
         <p class="plato-item__desc">Porción traída de Lambayeque, con manjar, piña y maní.</p>
       </article>
 
       <!-- Bebidas -->
       <article class="plato-item" data-cat="bebidas">
+        <img class="plato-item__foto" src="img/chichamorada.jpg" alt="Vaso de chicha morada." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Chicha morada de la casa <span class="etiqueta et-estrella">La casa</span></h3><span class="precio">S/ 7</span>
         <p class="plato-item__desc">Maíz morado hervido con piña, membrillo y clavo. Jarra de un litro a S/ 16.</p>
       </article>
       <article class="plato-item" data-cat="bebidas">
+        <img class="plato-item__foto" src="img/chichajora.jpg" alt="Vaso de chicha de jora." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Chicha de jora <span class="etiqueta et-nuevo">Fermenta aquí</span></h3><span class="precio">S/ 8</span>
         <p class="plato-item__desc">Fermentada en el local en cántaro de barro, servida en poto. Jarra a S/ 18.</p>
       </article>
       <article class="plato-item" data-cat="bebidas">
+        <img class="plato-item__foto" src="img/maracuya.jpg" alt="Jarra de refresco de maracuyá." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Refresco de maracuyá</h3><span class="precio">S/ 7</span>
         <p class="plato-item__desc">Maracuyá fresco exprimido al momento, poco dulce. Jarra a S/ 16.</p>
       </article>
       <article class="plato-item" data-cat="bebidas">
+        <img class="plato-item__foto" src="img/emoliente.jpg" alt="Vaso de emoliente caliente." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Emoliente y refresco de cebada</h3><span class="precio">S/ 5</span>
         <p class="plato-item__desc">Cebada tostada, linaza y cola de caballo. Ideal para el menú del mediodía.</p>
       </article>
       <article class="plato-item" data-cat="bebidas">
+        <img class="plato-item__foto" src="img/jugo.jpg" alt="Vaso de jugo de fruta natural." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Jugo de fruta del día</h3><span class="precio">S/ 9</span>
         <p class="plato-item__desc">Papaya, plátano, fresa o surtido, con leche o agua.</p>
       </article>
       <article class="plato-item" data-cat="bebidas">
+        <img class="plato-item__foto" src="img/cerveza.jpg" alt="Botella de cerveza peruana helada." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Cerveza nacional 620 ml</h3><span class="precio">S/ 12</span>
         <p class="plato-item__desc">Pilsen Callao, Cristal o Cusqueña dorada, bien helada.</p>
       </article>
       <article class="plato-item" data-cat="bebidas">
+        <img class="plato-item__foto" src="img/artesanal.jpg" alt="Vaso de cerveza artesanal." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Cerveza artesanal de Lima Norte</h3><span class="precio">S/ 16</span>
         <p class="plato-item__desc">IPA o roja de productor local, botella de 330 ml.</p>
       </article>
       <article class="plato-item" data-cat="bebidas">
+        <img class="plato-item__foto" src="img/piscosour.jpg" alt="Copa de pisco sour con su espuma." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Pisco sour</h3><span class="precio">S/ 18</span>
         <p class="plato-item__desc">Pisco quebranta, limón, jarabe y clara. También de maracuyá.</p>
       </article>
       <article class="plato-item" data-cat="bebidas">
+        <img class="plato-item__foto" src="img/gaseosa.jpg" alt="Botella y vaso de gaseosa Inca Kola." loading="lazy" decoding="async" width="500" height="375">
         <h3 class="plato-item__nom">Gaseosa personal / Agua mineral</h3><span class="precio">S/ 5</span>
         <p class="plato-item__desc">Inca Kola, Coca-Cola, Sprite. Agua con o sin gas.</p>
       </article>
@@ -1242,6 +1295,55 @@ html.sin-scroll,html.sin-scroll body{overflow:hidden}
         </ul>
       </div>
     </div>
+
+    <details class="creditos">
+      <summary>Créditos de las fotografías</summary>
+      <p>Todas las imágenes provienen de Wikimedia Commons y se usan bajo su licencia. El restaurante es ficticio: son fotos de referencia de los platos, no del local.</p>
+      <ul>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Arroz_con_pato_(Per%C3%BA).JPG" target="_blank" rel="noopener">Arroz con pato (portada)</a> — Dtarazona · dominio público</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Arroz_con_pato_con_sarsa.jpg" target="_blank" rel="noopener">Arroz con pato con sarza</a> — Miguel Alan Córdova Silva · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Pasta_de_aji_amarillo.jpg" target="_blank" rel="noopener">Pasta de ají amarillo</a> — MiguelAlanCS · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Chicha_morada_(olla).JPG" target="_blank" rel="noopener">Chicha morada en olla</a> — Dtarazona · dominio público</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Que_ricos_picarones!.jpg" target="_blank" rel="noopener">Picarones</a> — G M · CC BY 2.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Grandmother_preparing_food_inside_traditional_kitchen_(edited).jpg" target="_blank" rel="noopener">Cocina tradicional a leña</a> — Original: Mithun Kunwar Derivative work: Rado · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Papa_a_la_huancaina.jpg" target="_blank" rel="noopener">Papa a la huancaína</a> — Feralbt · CC BY 3.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Causa_rellena_de_pollo.jpg" target="_blank" rel="noopener">Causa rellena</a> — KaMpErƎ & Le-tticia · CC BY 2.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Anticuchos_de_Corazon.jpg" target="_blank" rel="noopener">Anticuchos de corazón</a> — August Dominus · CC0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Ocopa_(Peru).JPG" target="_blank" rel="noopener">Ocopa</a> — Dtarazona · CC BY-SA 3.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Fried_squid;_Calamares_fritos_(Las_Siete_Orillas_project)_(1).jpg" target="_blank" rel="noopener">Calamar frito</a> — El Mono Español · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Tamal_peruano.jpg" target="_blank" rel="noopener">Tamal</a> — Miguel Alan Córdova Silva · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Arroz_con_pato_a_la_chiclayana.JPG" target="_blank" rel="noopener">Arroz con pato a la chiclayana</a> — Dtarazona · dominio público</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Cabrito_estilo_norte%C3%B1o.jpg" target="_blank" rel="noopener">Cabrito norteño</a> — Marifer Veloz · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Seco_y_frejoles.jpg" target="_blank" rel="noopener">Seco con frejoles</a> — MiguelAlanCS · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Aj%C3%AD_de_gallina.jpg" target="_blank" rel="noopener">Ají de gallina</a> — Feralbt · CC BY-SA 3.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Lomo_saltado_peruano.jpg" target="_blank" rel="noopener">Lomo saltado</a> — Miguel Alan Córdova Silva · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Carapulcra_con_Sopa_Seca_Chinchana_2.jpg" target="_blank" rel="noopener">Carapulcra con sopa seca</a> — Angel Olin from Peru · CC BY-SA 2.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Caucau.jpg" target="_blank" rel="noopener">Cau cau</a> — MiguelAlanCS · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Adobo_de_cerdo_04072010.jpg" target="_blank" rel="noopener">Adobo de cerdo</a> — Dtarazona · CC BY-SA 3.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Tallarin_saltado_criollo.jpg" target="_blank" rel="noopener">Tallarín saltado criollo</a> — MiguelAlanCS · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Estofado_de_pollo.jpg" target="_blank" rel="noopener">Estofado de pollo</a> — MiguelAlanCS · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Ceviche_peruano.jpg" target="_blank" rel="noopener">Ceviche</a> — MiguelAlanCS · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Ceviche_peruano_2.jpg" target="_blank" rel="noopener">Ceviche mixto</a> — MiguelAlanCS · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Jalea_mixta.JPG" target="_blank" rel="noopener">Jalea mixta</a> — Dtarazona · dominio público</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Arroz_con_mariscos.jpg" target="_blank" rel="noopener">Arroz con mariscos</a> — Manuel González Olaechea · CC BY-SA 3.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Sudado_de_pescado.jpg" target="_blank" rel="noopener">Sudado de pescado</a> — tacowitte from Holland · CC BY 2.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Chicharrones_de_Pescado.jpg" target="_blank" rel="noopener">Chicharrón de pescado</a> — Christian Van Der Henst S. from San Francisco · CC BY 2.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Leche_de_tigre.JPG" target="_blank" rel="noopener">Leche de tigre</a> — Dtarazona · CC BY-SA 3.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Suspiro_lime%C3%B1o.jpg" target="_blank" rel="noopener">Suspiro limeño</a> — Luisfranciscopm · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Vasos_de_mazamorra_morada_y_arroz_con_leche.jpg" target="_blank" rel="noopener">Arroz con leche y mazamorra</a> — GORE Callao · dominio público</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Picarones_reci%C3%A9n_hechos.jpg" target="_blank" rel="noopener">Picarones recién hechos</a> — Ricardo Diaz · CC BY 2.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Barra_king_kong.jpg" target="_blank" rel="noopener">King kong de Lambayeque</a> — MiguelAlanCS · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Chicha_morada.jpg" target="_blank" rel="noopener">Chicha morada</a> — August Dominus · CC0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Chicha_de_jora_en_vaso.JPG" target="_blank" rel="noopener">Chicha de jora</a> — Dtarazona · dominio público</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Jarra_de_jugo_de_maracuy%C3%A1_servido_en_La_Feirinha_de_Puerto_Iguaz%C3%BA.jpg" target="_blank" rel="noopener">Jugo de maracuyá</a> — Horacio Cambeiro · CC BY-SA 3.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Emol.jpg" target="_blank" rel="noopener">Emoliente</a> — MiguelAlanCS · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Passion_Fruit_Juice_-_%E0%B4%AA%E0%B4%BE%E0%B4%B7%E0%B5%BB_%E0%B4%AB%E0%B5%8D%E0%B4%B0%E0%B5%82%E0%B4%9F%E0%B5%8D%E0%B4%9F%E0%B5%8D_%E0%B4%9C%E0%B5%8D%E0%B4%AF%E0%B5%82%E0%B4%B8%E0%B5%8D.jpg" target="_blank" rel="noopener">Jugo de fruta</a> — Shijan Kaakkara · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Cerveza_Cusquena.JPG" target="_blank" rel="noopener">Cerveza Cusqueña</a> — R. Mathis · CC BY 3.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Cerveza_artesanal.jpg" target="_blank" rel="noopener">Cerveza artesanal</a> — Ludmiev · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:Pisco_Sour.JPG" target="_blank" rel="noopener">Pisco sour</a> — HugoMon · CC BY-SA 4.0</li>
+        <li><a href="https://commons.wikimedia.org/wiki/File:IncaKolaBottleGlass.jpg" target="_blank" rel="noopener">Inca Kola</a> — Markus Leupold-Löwenthal · CC BY-SA 3.0</li>
+      </ul>
+    </details>
 
     <div class="pie__base">
       <span>© <span id="anio">2026</span> La Sazón del Norte S. A. C. — RUC 20512345678. Restaurante ficticio, sitio de demostración.</span>
